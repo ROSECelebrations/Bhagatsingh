@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Independence Day Presentation</title>
+    <style>
+        /* --- Clean Apple Typography & Reset --- */
+        :root {
+            --saffron: #FF671F;
+            --white: #FFFFFF;
+            --green: #046A38;
+            --navy: #06038D;
+            --bg-color: #F5F5F7; /* Apple Light Gray */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: #1D1D1F;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* --- Minimalist Header --- */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--navy);
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #86868B;
+        }
+
+        /* --- Presentation Board (Web View) --- */
+        .presentation-board {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            aspect-ratio: 16 / 9; /* Perfect PPT Ratio */
+            background-color: #000;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            /* Subtle Tricolor Top Border */
+            border-top: 4px solid;
+            border-image: linear-gradient(to right, var(--saffron) 33%, var(--white) 33%, var(--white) 66%, var(--green) 66%) 1;
+        }
+
+        /* --- Track & Slides --- */
+        .slides-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* GUARANTEES NO CUTTING */
+            display: block;
+        }
+
+        /* --- Controls (Arrows & Fullscreen) --- */
+        .control-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.2s ease;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev-btn { left: 20px; }
+        .next-btn { right: 20px; }
+
+        .fullscreen-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            top: auto;
+            transform: none;
+            width: 40px;
+            height: 40px;
+        }
+
+        .fullscreen-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* --- FULLSCREEN NATIVE OVERRIDES --- */
+        /* When the presentation-board enters fullscreen, the browser applies this natively */
+        .presentation-board:fullscreen {
+            border-radius: 0;
+            border-top: none;
+            background-color: #000;
+        }
+        
+        .presentation-board:-webkit-full-screen {
+            border-radius: 0;
+            border-top: none;
+            background-color: #000;
+        }
+
+        /* Responsive adjustments for phones in portrait */
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.8rem; }
+            .control-btn { width: 40px; height: 40px; }
+            .prev-btn { left: 10px; }
+            .next-btn { right: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Independence Day</h1>
+        <p>A Journey of Freedom</p>
+    </header>
+
+    <!-- The Presentation Board: ONLY this container goes fullscreen -->
+    <div class="presentation-board" id="presentation-board">
+        
+        <div class="slides-track" id="slides-track">
+            <!-- Slide 1 -->
+            <div class="slide"><img src="https://images.unsplash.com/photo-1590432310156-f61b09b932be?q=80&w=1920&auto=format&fit=crop" alt="Slide 1"></div>
+            <!-- Slide 2 -->
+            <div class="slide"><img src="https://images.unsplash.com/photo-1582298538104-fe2e74cb3ab4?q=80&w=1920&auto=format&fit=crop" alt="Slide 2"></div>
+            <!-- Slide 3 -->
+            <div class="slide"><img src="https://images.unsplash.com/photo-1599553535232-a0774a3818e6?q=80&w=1920&auto=format&fit=crop" alt="Slide 3"></div>
+            <!-- Slide 4 -->
+            <div class="slide"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=1920&auto=format&fit=crop" alt="Slide 4"></div>
+            <!-- Slide 5 -->
+            <div class="slide"><img src="https://images.unsplash.com/photo-1585806684820-25fc28062973?q=80&w=1920&auto=format&fit=crop" alt="Slide 5"></div>
+            <!-- Slide 6 -->
+            <div class="slide"><img src="https://images.unsplash.com/photo-1507449767784-06d2d4807ee1?q=80&w=1920&auto=format&fit=crop" alt="Slide 6"></div>
+            <!-- Slide 7 -->
+            <div class="slide"><img src="https://images.unsplash.com/photo-1597521501174-839ec9b74fb5?q=80&w=1920&auto=format&fit=crop" alt="Slide 7"></div>
+        </div>
+
+        <!-- Navigation -->
+        <button class="control-btn prev-btn" id="prev-btn" aria-label="Previous">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+
+        <button class="control-btn next-btn" id="next-btn" aria-label="Next">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+
+        <!-- Fullscreen Toggle -->
+        <button class="control-btn fullscreen-btn" id="fs-btn" aria-label="Fullscreen">
+            <svg id="fs-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+            </svg>
+        </button>
+
+    </div>
+
+    <script>
+        // --- Fullscreen & Mobile Rotation Logic ---
+        const presentationBoard = document.getElementById('presentation-board');
+        const fsBtn = document.getElementById('fs-btn');
+        const fsIcon = document.getElementById('fs-icon');
+
+        fsBtn.addEventListener('click', async () => {
+            if (!document.fullscreenElement) {
+                try {
+                    // Enter Fullscreen specifically on the BOARD, not the whole body
+                    await presentationBoard.requestFullscreen();
+                    
+                    // Force mobile into landscape when entering fullscreen
+                    if (screen.orientation && screen.orientation.lock) {
+                        await screen.orientation.lock('landscape').catch(() => {}); 
+                    }
+                } catch (err) {
+                    console.log("Fullscreen blocked or not supported.");
+                }
+            } else {
+                document.exitFullscreen();
+            }
+        });
+
+        // Toggle Fullscreen Icon
+        document.addEventListener('fullscreenchange', () => {
+            if (document.fullscreenElement) {
+                fsIcon.innerHTML = `<path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path>`;
+            } else {
+                fsIcon.innerHTML = `<path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>`;
+                if (screen.orientation && screen.orientation.unlock) {
+                    screen.orientation.unlock();
+                }
+            }
+        });
+
+        // --- Slide Navigation Logic ---
+        const track = document.getElementById('slides-track');
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        let currentIndex = 0;
+
+        function updateSlide(index) {
+            if (index < 0) {
+                currentIndex = slides.length - 1; // Loop to end
+            } else if (index >= slides.length) {
+                currentIndex = 0; // Loop to start
+            } else {
+                currentIndex = index;
+            }
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        nextBtn.addEventListener('click', () => updateSlide(currentIndex + 1));
+        prevBtn.addEventListener('click', () => updateSlide(currentIndex - 1));
+
+        // Keyboard support (Left/Right Arrows)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') updateSlide(currentIndex + 1);
+            if (e.key === 'ArrowLeft') updateSlide(currentIndex - 1);
+        });
+    </script>
+</body>
+</html>
